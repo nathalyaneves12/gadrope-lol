@@ -5,141 +5,118 @@
 const RECENT_MATCHES = [
     {
         id: 1,
-        champ: "Jinx",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png",
-        level: 16,
-        isWin: true,
+        champ: "Kalista",
+        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kalista.png",
+        level: 15,
+        isWin: false,
         type: "Solo/Duo",
-        time: "Há 45 min",
-        kills: 12,
-        deaths: 3,
-        assists: 9,
-        kdaRatio: "7.00",
-        kdaBadge: "MVP do Jogo",
-        badgeType: "gold",
-        spells: ["SummonerFlash", "SummonerHeal"], 
-        items: ["6672", "3031", "3085", "3006", "3036", "3026", "3363"], // Kraken, IE, Runaan, Berserkers, LDR, Guardian Angel, Blue Trinket
-        cs: 268,
-        csPerMin: "8.1",
-        visionScore: 18,
-        controlWards: 3,
-        coachTitle: "Kiting Perfeito e Foco de Linha de Frente Recuada",
-        coachText: "Jogo excelente de Jinx! Você respeitou o posicionamento do Zed inimigo nas lutas de equipe e esperou ele focar seu Midlaner antes de se expor. Uma vez ativada a passiva (Excited!), você limpou a luta com o Runaan. Manteve o farm acima de 8 CS/min. Essa deve ser sua meta padrão de jogo!"
+        time: "Há 13 horas",
+        kills: 3,
+        deaths: 11,
+        assists: 1,
+        kdaRatio: "0.36",
+        kdaBadge: "Sem Impacto",
+        badgeType: "none",
+        spells: ["SummonerFlash", "SummonerHaste"],
+        items: ["6672", "3153", "3124", "3036", "1028", "3006", "3340"],
+        cs: 230,
+        csPerMin: "6.8",
+        visionScore: 14,
+        controlWards: 2,
+        coachTitle: "Dificuldade contra Engage Inimigo",
+        coachText: "Nesta partida de Kalista, você teve sérios problemas para se posicionar contra a linha de frente inimiga. Suas trocas iniciais foram punidas e as mortes sucessivas impediram que você alcançasse o pico de poder de Guinsoo a tempo. Foque em caitar recuado usando seus saltos defensivamente quando os tanques avançarem."
     },
     {
         id: 2,
-        champ: "Kaisa",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kaisa.png",
-        level: 15,
-        isWin: true,
+        champ: "Zeri",
+        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Zeri.png",
+        level: 16,
+        isWin: false,
         type: "Solo/Duo",
-        time: "Há 2 horas",
-        kills: 8,
-        deaths: 2,
-        assists: 11,
-        kdaRatio: "9.50",
-        kdaBadge: "Carry Solo",
-        badgeType: "blue",
-        spells: ["SummonerFlash", "SummonerBarrier"],
-        items: ["3152", "3124", "3115", "3006", "3157", "3363"], // Stormrazor, Guinsoos, Nashors, Berserkers, Zhonyas
-        cs: 215,
-        csPerMin: "7.4",
-        visionScore: 21,
-        controlWards: 2,
-        coachTitle: "Excelente Uso da Ultimate (R) para Desviar de Skillshots",
-        coachText: "Ótima Kai'Sa! No dragão aos 19 minutos, a Lux inimiga tentou te dar o combo completo de longe. Você usou seu Instinto Assassino (R) para a lateral, saindo da área do laser e caindo nas costas do atirador deles para eliminá-lo. Excelente leitura situacional de dive."
+        time: "Há 15 horas",
+        kills: 7,
+        deaths: 6,
+        assists: 10,
+        kdaRatio: "2.83",
+        kdaBadge: "Desempenho Razoável",
+        badgeType: "none",
+        spells: ["SummonerFlash", "SummonerHaste"],
+        items: ["3087", "6672", "3031", "3085", "3006", "", "3340"],
+        cs: 237,
+        csPerMin: "6.8",
+        visionScore: 16,
+        controlWards: 1,
+        coachTitle: "Falta de Burst nas Teamfights Decisivas",
+        coachText: "Seu farm e KDA foram razoáveis de Zeri, mas você falhou em converter sua vantagem em dano real nas lutas decisivas de dragão. Lembre-se de ativar sua ultimate (Sobrecarga) somente quando os inimigos estiverem agrupados e você tiver espaço livre para disparar com a passiva carregada."
     },
     {
         id: 3,
-        champ: "Ezreal",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ezreal.png",
-        level: 14,
-        isWin: false,
-        type: "Solo/Duo",
-        time: "Há 5 horas",
-        kills: 3,
-        deaths: 6,
-        assists: 4,
-        kdaRatio: "1.17",
-        kdaBadge: "Sem Impacto",
-        badgeType: "none",
-        spells: ["SummonerFlash", "SummonerTeleport"],
-        items: ["3078", "3004", "3035", "3158", "3363"], // Trinity, Muramana, Seryldas, Lucidity Boots
-        cs: 184,
-        csPerMin: "5.8",
-        visionScore: 12,
-        controlWards: 1,
-        coachTitle: "Abandono Crítico das Rotas Laterais (Falta de Farm)",
-        coachText: "Seu início de rota foi decente, mas após a queda da sua torre, você ficou dividindo experiência com o Midlaner. Isso derrubou seu CS/min para 5.8 e atrasou sua Serylda. De Ezreal, se você não tem vantagem de itens de 2 itens e meio no meio do jogo, seu poke não causa dano nos tanques."
-    },
-    {
-        id: 4,
-        champ: "Jinx",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png",
+        champ: "Kalista",
+        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kalista.png",
         level: 17,
         isWin: true,
         type: "Solo/Duo",
         time: "Há 1 dia",
-        kills: 15,
-        deaths: 4,
-        assists: 8,
-        kdaRatio: "5.75",
-        kdaBadge: "MVP da Partida",
-        badgeType: "gold",
-        spells: ["SummonerFlash", "SummonerHeal"],
-        items: ["6672", "3031", "3085", "3006", "3036", "3363"],
+        kills: 11,
+        deaths: 11,
+        assists: 14,
+        kdaRatio: "2.27",
+        kdaBadge: "Participativo",
+        badgeType: "blue",
+        spells: ["SummonerFlash", "SummonerCleanse"],
+        items: ["3153", "3124", "3091", "6672", "3026", "3006", "3364"],
         cs: 290,
+        csPerMin: "7.6",
+        visionScore: 21,
+        controlWards: 3,
+        coachTitle: "Ótima Sincronia de Lanças e Purificar",
+        coachText: "Boa vitória! Você acumulou lanças eficientemente nos alvos prioritários e usou o Purificar (Cleanse) perfeitamente para sair do controle de grupo do suporte adversário. Apesar das 11 mortes, sua presença e dano nas lutas do Barão foram o diferencial para fechar o jogo."
+    },
+    {
+        id: 4,
+        champ: "Kalista",
+        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kalista.png",
+        level: 16,
+        isWin: true,
+        type: "Solo/Duo",
+        time: "Há 2 dias",
+        kills: 17,
+        deaths: 2,
+        assists: 7,
+        kdaRatio: "12.00",
+        kdaBadge: "MVP do Jogo",
+        badgeType: "gold",
+        spells: ["SummonerFlash", "SummonerCleanse"],
+        items: ["3153", "3124", "6672", "3091", "3026", "3006", "3340"],
+        cs: 263,
         csPerMin: "8.3",
-        visionScore: 25,
+        visionScore: 19,
         controlWards: 4,
-        coachTitle: "Uso Estratégico de Mordequinhas (E) no Choke Point",
-        coachText: "Durante a luta no Barão, você jogou suas armadilhas (E) exatamente no gargalo da selva inimiga. Isso impediu o avanço da Leona adversária, permitindo que seu time executasse o Barão e depois virasse a luta. Excelente consciência de controle de zona!"
+        coachTitle: "Domínio Absoluto de Rota e Snowball",
+        coachText: "Desempenho espetacular de Kalista! Conseguiu abates iniciais com o suporte jogando agressivo. Sua transição para o mid game foi perfeita, mantendo o farm alto (8.3 CS/min) e garantindo abates solo. Um verdadeiro exemplo de como carregar como atirador."
     },
     {
         id: 5,
-        champ: "Lucian",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Lucian.png",
-        level: 12,
-        isWin: false,
+        champ: "Zeri",
+        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Zeri.png",
+        level: 18,
+        isWin: true,
         type: "Solo/Duo",
         time: "Há 2 dias",
-        kills: 2,
-        deaths: 7,
-        assists: 3,
-        kdaRatio: "0.71",
-        kdaBadge: "Tiltado",
-        badgeType: "none",
-        spells: ["SummonerFlash", "SummonerDot"],
-        items: ["6671", "3508", "3006", "3363"], // Galeforce, Essence Reaver
-        cs: 145,
-        csPerMin: "6.1",
-        visionScore: 9,
-        controlWards: 0,
-        coachTitle: "Trocas Ineficientes de Curto Alcance",
-        coachText: "Você escolheu Lucian contra um Caitlyn + Lux. Sofreu zoneamento constante devido à diferença de alcance. Tentou forçar desengajamentos usando o Dash (E) ofensivamente e foi punido toda vez pela Lux inimiga. Não jogue de Lucian contra duplas de alta distância poke, a menos que seu suporte seja um Milio ou Nami."
-    },
-    {
-        id: 6,
-        champ: "Vayne",
-        champImg: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Vayne.png",
-        level: 13,
-        isWin: false,
-        type: "Solo/Duo",
-        time: "Há 3 dias",
-        kills: 1,
-        deaths: 6,
-        assists: 2,
-        kdaRatio: "0.50",
-        kdaBadge: "Frágil",
-        badgeType: "none",
-        spells: ["SummonerFlash", "SummonerCleanse"],
-        items: ["3115", "3006", "3124", "3363"], // Nashors, Berserkers, Guinsoos
-        cs: 152,
-        csPerMin: "5.9",
-        visionScore: 11,
-        controlWards: 1,
-        coachTitle: "Vulnerabilidade ao Hard Engage na Laning Phase",
-        coachText: "O Draven + Leona inimigos abusaram da sua fraqueza nível 1-3. Você acabou morrendo no dive aos 4 minutos e a rota acabou ali. A Vayne ranqueada requer muita proteção no early game. No atual elo Platina II, jogar de Vayne sem suporte duo é uma aposta arriscada."
+        kills: 21,
+        deaths: 8,
+        assists: 28,
+        kdaRatio: "6.12",
+        kdaBadge: "MVP da Partida",
+        badgeType: "gold",
+        spells: ["SummonerFlash", "SummonerHaste"],
+        items: ["3087", "3031", "3085", "3072", "3036", "3006", "3340"],
+        cs: 286,
+        csPerMin: "8.0",
+        visionScore: 28,
+        controlWards: 5,
+        coachTitle: "Hypercarry Zeri Ativada!",
+        coachText: "Um jogo caótico com 49 participações em abates! Você soube se posicionar de forma impecável nas lutas na rota do meio, usando a parede para deslizar (E) de forma segura quando flanqueado e derretendo a equipe adversária sob o efeito da ultimate. Excelente jogo!"
     }
 ];
 
@@ -150,7 +127,8 @@ const SPELL_MAP = {
     SummonerExhaust: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerExhaust.png",
     SummonerBarrier: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerBarrier.png",
     SummonerTeleport: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerTeleport.png",
-    SummonerCleanse: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerBoost.png"
+    SummonerCleanse: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerBoost.png",
+    SummonerHaste: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/SummonerHaste.png"
 };
 
 const SPELL_ID_MAP = {
@@ -228,6 +206,14 @@ const OTPS_DATABASE = {
         { name: "Rata-Tat KR", rank: "Challenger 1120 LP", winrate: "62.8%", games: "284 partidas", build: ["6676", "6673", "3031"], buildNames: ["Coletor", "Arco-Escudo", "Gume"] },
         { name: "GiraGira BR", rank: "Grão-Mestre 810 LP", winrate: "60.1%", games: "205 partidas", build: ["6676", "6673", "3036"], buildNames: ["Coletor", "Arco-Escudo", "LDR"] },
         { name: "TriggerHappy NA", rank: "Mestre 380 LP", winrate: "58.0%", games: "145 partidas", build: ["6673", "3031", "3036"], buildNames: ["Arco-Escudo", "Gume", "LDR"] }
+    ],
+    Kalista: [
+        { name: "Kalista Mono KR", rank: "Challenger 1420 LP", winrate: "65.4%", games: "310 partidas", build: ["3153", "3124", "6672"], buildNames: ["Espada do Rei", "Guinsoo", "Kraken"] },
+        { name: "SaltaLança BR", rank: "Grão-Mestre 890 LP", winrate: "62.1%", games: "215 partidas", build: ["3153", "3124", "3091"], buildNames: ["Espada do Rei", "Guinsoo", "Wit's End"] }
+    ],
+    Zeri: [
+        { name: "Zeri Spark KR", rank: "Challenger 1560 LP", winrate: "64.0%", games: "420 partidas", build: ["3087", "3031", "3085"], buildNames: ["Statikk", "Gume da Infinito", "Runaan"] },
+        { name: "Zeri Mono BR", rank: "Grão-Mestre 820 LP", winrate: "61.3%", games: "278 partidas", build: ["3087", "6672", "3031"], buildNames: ["Statikk", "Kraken", "Gume da Infinito"] }
     ]
 };
 
@@ -236,17 +222,17 @@ const MOCK_PROFILES = {
         name: "Kókó 痛み",
         tag: "red",
         region: "BR",
-        level: 284,
+        level: 976,
         role: "Atirador Principal (ADC)",
-        icon: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png",
-        tier: "Platina II",
-        lp: 45,
-        wins: 120,
-        losses: 109,
+        icon: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/6700.png",
+        tier: "Platina I",
+        lp: 17,
+        wins: 243,
+        losses: 241,
         matches: RECENT_MATCHES,
-        lpHistory: [15, 30, 45, 10, 25, 45, 60, 75, 90, 8, 20, 35, 55, 70, 85, 98, 12, 28, 45, 55, 30, 15, 35, 45, 65, 80, 45],
-        farmDuration: [7.8, 7.6, 7.3, 6.7, 5.2, 4.8, 4.5],
-        coachTip: "Sua **Jinx (62%)** e sua **Kai'Sa (58%)** são escolhas de elo Diamante! Porém, jogar de **Lucian (47%)** e **Vayne (40%)** drena seu PDL ganho. Remova-os da fila ranqueada para subir rápido."
+        lpHistory: [10, 25, 40, 15, 30, 45, 60, 40, 55, 70, 85, 95, 15, 30, 45, 60, 45, 30, 45, 60, 75, 90, 8, 24, 10, 27, 17],
+        farmDuration: [8.3, 8.0, 7.6, 6.8, 6.8],
+        coachTip: "Sua **Kalista (67% WR)** e sua **Zeri (50% WR)** são ótimos campeões de hypercarry! Mantenha o foco em caitar e evite morrer antes de fechar seus itens principais de pico de poder."
     },
     "Hide on bush #KR1": {
         name: "Hide on bush",
@@ -987,6 +973,296 @@ const CHAMP_BUILDS_DATABASE = {
             { name: "Alistar", winrate: "58.2%", strength: "excelent", label: "Excelente", desc: "O combo do Alistar (W+Q) ergue múltiplos inimigos, ativando instantaneamente a passiva de salto da Samira." },
             { name: "Janna", winrate: "43.5%", strength: "weak", label: "Incompatível", desc: "Janna quer afastar os inimigos (peel de desengajamento), enquanto a Samira precisa pular de cabeça no meio do time deles." }
         ]
+    },
+    Kalista: {
+        KR: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Ritmo Letal (Lethal Tempo)",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png",
+                slots: [
+                    { name: "Triunfo", active: true },
+                    { name: "Lenda: Espontaneidade", active: true },
+                    { name: "Golpe de Misericórdia", active: true }
+                ],
+                secondary: "Dominação",
+                secondaryColor: "domination",
+                secondarySlots: [
+                    { name: "Gosto de Sangue", active: true },
+                    { name: "Caçador de Tesouros", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["E", "Q", "W"],
+                grid: [
+                    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Espada do Rei Destruído", cost: "3200", id: "3153" },
+                    { name: "Lâmina da Fúria de Guinsoo", cost: "3200", id: "3124" },
+                    { name: "Mata-Cráquens", cost: "3000", id: "6672" }
+                ],
+                situational: [
+                    { name: "Limite da Razão", cost: "2900", id: "3091" },
+                    { name: "Anjo Guardião", cost: "3000", id: "3026" },
+                    { name: "Sinal de Sterak", cost: "3000", id: "3053" }
+                ]
+            }
+        },
+        BR: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Ritmo Letal",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png",
+                slots: [
+                    { name: "Presença de Espírito", active: true },
+                    { name: "Lenda: Linhagem", active: true },
+                    { name: "Dilacerar (Cut Down)", active: true }
+                ],
+                secondary: "Inspiração",
+                secondaryColor: "inspiration",
+                secondarySlots: [
+                    { name: "Entrega de Biscoitos", active: true },
+                    { name: "Perspicácia Cósmica", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["E", "Q", "W"],
+                grid: [
+                    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Espada do Rei Destruído", cost: "3200", id: "3153" },
+                    { name: "Lâmina da Fúria de Guinsoo", cost: "3200", id: "3124" },
+                    { name: "Limite da Razão", cost: "2900", id: "3091" }
+                ],
+                situational: [
+                    { name: "Arco-Escudo Imortal", cost: "3000", id: "6673" },
+                    { name: "Lembranças do Lorde Dominik", cost: "3000", id: "3036" },
+                    { name: "Anjo Guardião", cost: "3000", id: "3026" }
+                ]
+            }
+        },
+        NA: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Pressione o Ataque (PTA)",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/PressTheAttack/PressTheAttack.png",
+                slots: [
+                    { name: "Triunfo", active: true },
+                    { name: "Lenda: Linhagem", active: true },
+                    { name: "Golpe de Misericórdia", active: true }
+                ],
+                secondary: "Dominação",
+                secondaryColor: "domination",
+                secondarySlots: [
+                    { name: "Caçador de Tesouros", active: true },
+                    { name: "Gosto de Sangue", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["E", "Q", "W"],
+                grid: [
+                    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1],
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Espada do Rei Destruído", cost: "3200", id: "3153" },
+                    { name: "Lâmina da Fúria de Guinsoo", cost: "3200", id: "3124" },
+                    { name: "Mata-Cráquens", cost: "3000", id: "6672" }
+                ],
+                situational: [
+                    { name: "Anjo Guardião", cost: "3000", id: "3026" },
+                    { name: "Sinal de Sterak", cost: "3000", id: "3053" },
+                    { name: "Lembranças do Lorde Dominik", cost: "3000", id: "3036" }
+                ]
+            }
+        },
+        synergy: [
+            { name: "Thresh", winrate: "64.5%", strength: "excelent", label: "Excelente", desc: "A lanterna do Thresh adiciona uma camada extra de segurança para a Kalista, e ele pode facilmente acompanhar seu engage com a Ultimate (Chamado do Destino)." },
+            { name: "Nautilus", winrate: "62.0%", strength: "excelent", label: "Excelente", desc: "Controle de grupo em cadeia massivo. O ultimate da Kalista jogando o Nautilus no meio dos inimigos garante uma iniciação devastadora." },
+            { name: "Lulu", winrate: "48.2%", strength: "weak", label: "Incompatível", desc: "Lulu funciona melhor com hipercarries de longo alcance de auto-ataques parados, enquanto a Kalista se move constantemente e prefere engages explosivos." }
+        ]
+    },
+    Zeri: {
+        KR: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Ritmo Letal (Lethal Tempo)",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png",
+                slots: [
+                    { name: "Triunfo", active: true },
+                    { name: "Lenda: Linhagem", active: true },
+                    { name: "Golpe de Misericórdia", active: true }
+                ],
+                secondary: "Inspiração",
+                secondaryColor: "inspiration",
+                secondarySlots: [
+                    { name: "Entrega de Biscoitos", active: true },
+                    { name: "Calçados Mágicos", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["Q", "E", "W"],
+                grid: [
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Faca de Statikk", cost: "2900", id: "3087" },
+                    { name: "Gume da Infinito", cost: "3400", id: "3031" },
+                    { name: "Furacão de Runaan", cost: "2800", id: "3085" }
+                ],
+                situational: [
+                    { name: "Lembranças do Lorde Dominik", cost: "3000", id: "3036" },
+                    { name: "Sedenta por Sangue", cost: "3400", id: "3072" },
+                    { name: "Arco-Escudo Imortal", cost: "3000", id: "6673" }
+                ]
+            }
+        },
+        BR: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Ritmo Letal",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png",
+                slots: [
+                    { name: "Presença de Espírito", active: true },
+                    { name: "Lenda: Linhagem", active: true },
+                    { name: "Dilacerar", active: true }
+                ],
+                secondary: "Determinação",
+                secondaryColor: "resolve",
+                secondarySlots: [
+                    { name: "Condicionamento", active: true },
+                    { name: "Crescimento Excessivo", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["Q", "E", "W"],
+                grid: [
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Faca de Statikk", cost: "2900", id: "3087" },
+                    { name: "Mata-Cráquens", cost: "3000", id: "6672" },
+                    { name: "Gume da Infinito", cost: "3400", id: "3031" }
+                ],
+                situational: [
+                    { name: "Furacão de Runaan", cost: "2800", id: "3085" },
+                    { name: "Anjo Guardião", cost: "3000", id: "3026" },
+                    { name: "Sedenta por Sangue", cost: "3400", id: "3072" }
+                ]
+            }
+        },
+        NA: {
+            runes: {
+                primary: "Precisão",
+                primaryColor: "gold",
+                keystone: "Ritmo Letal",
+                keystoneImg: "https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png",
+                slots: [
+                    { name: "Presença de Espírito", active: true },
+                    { name: "Lenda: Linhagem", active: true },
+                    { name: "Golpe de Misericórdia", active: true }
+                ],
+                secondary: "Inspiração",
+                secondaryColor: "inspiration",
+                secondarySlots: [
+                    { name: "Calçados Mágicos", active: true },
+                    { name: "Entrega de Biscoitos", active: true }
+                ],
+                shards: ["offense", "flex", "defense"],
+                shardNames: ["+10% Vel. Ataque", "+9 Força Adaptativa", "+6 Armadura"]
+            },
+            skills: {
+                maxOrder: ["Q", "E", "W"],
+                grid: [
+                    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1]
+                ]
+            },
+            items: {
+                starting: [
+                    { name: "Lâmina de Doran", cost: "450", id: "1055" },
+                    { name: "Poção de Vida", cost: "50", id: "2003" }
+                ],
+                core: [
+                    { name: "Mata-Cráquens", cost: "3000", id: "6672" },
+                    { name: "Gume da Infinito", cost: "3400", id: "3031" },
+                    { name: "Furacão de Runaan", cost: "2800", id: "3085" }
+                ],
+                situational: [
+                    { name: "Limite da Razão", cost: "2900", id: "3091" },
+                    { name: "Lembranças do Lorde Dominik", cost: "3000", id: "3036" },
+                    { name: "Anjo Guardião", cost: "3000", id: "3026" }
+                ]
+            }
+        },
+        synergy: [
+            { name: "Lulu", winrate: "60.4%", strength: "excelent", label: "Excelente", desc: "Aumenta a velocidade de ataque e de movimento da Zeri, permitindo um caiting extremamente veloz nas lutas de equipe." },
+            { name: "Yuumi", winrate: "57.8%", strength: "excelent", label: "Excelente", desc: "Yuumi concede cura, velocidade e escudo constantes enquanto a Zeri se move agressivamente com sua mobilidade alta." },
+            { name: "Nautilus", winrate: "45.1%", strength: "weak", label: "Incompatível", desc: "Nautilus quer iniciar lutas imediatas e curtas (burst), enquanto a Zeri prefere lutas estendidas de alta mobilidade e kite." }
+        ]
     }
 };
 
@@ -1017,6 +1293,18 @@ const MATCHUP_MATRIX = {
         { enemy: "Zeri", winrate: "59.0%", difficulty: "easy", tip: "Zeri tem dificuldade em lidar com engage explosivo no início. Dê engage junto com seu suporte nível 2 ou 3 para matá-la." },
         { enemy: "Caitlyn", winrate: "46.0%", difficulty: "hard", tip: "O poke dela dificulta você manter a vida alta para dar o all-in. Use o W para bloquear o Headshot dela se necessário. Farme seguro." },
         { enemy: "Draven", winrate: "35.0%", difficulty: "hard", tip: "O dano dele é maior que o seu em trocas curtas e ele cancela seu avanço (E) com o W/E dele. Evite lutar sem controle de grupo pesado do suporte." }
+    ],
+    Kalista: [
+        { enemy: "Ezreal", winrate: "58.2%", difficulty: "easy", tip: "Você consegue desviar dos disparos de Q dele facilmente saltando na rota. Pressione o all-in assim que ele usar o E agressivamente." },
+        { enemy: "Zeri", winrate: "56.0%", difficulty: "easy", tip: "Seu early game é muito mais forte. Pressione e abuse das lanças para negar o farm dela no início." },
+        { enemy: "Caitlyn", winrate: "44.0%", difficulty: "hard", tip: "O maior alcance dela dificulta acumular lanças e abusar do E. Jogue recuado e aguarde iniciações do suporte." },
+        { enemy: "Draven", winrate: "38.0%", difficulty: "hard", tip: "O dano de troca dele com machados é maior que o seu. Evite trocas longas sem ajuda." }
+    ],
+    Zeri: [
+        { enemy: "Aphelios", winrate: "54.8%", difficulty: "easy", tip: "Você escala melhor no late game. Mantenha o farm e abuse das paredes com o E para surpreendê-lo." },
+        { enemy: "Jinx", winrate: "52.0%", difficulty: "medium", tip: "Ambos escalam muito bem. Tente desviar do W e E da Jinx com seu E e busque lutas estendidas." },
+        { enemy: "Caitlyn", winrate: "43.5%", difficulty: "hard", tip: "Pressão de alcance no início. Farme sob a torre usando seu clique com passiva carregada para garantir minions." },
+        { enemy: "Draven", winrate: "40.0%", difficulty: "hard", tip: "Ele pode interromper seu avanço e te explodir. Aguarde itens de velocidade de movimento e controle de grupo aliado." }
     ]
 };
 
@@ -1051,6 +1339,18 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Initial best champions list update
     updateBestChampionsList(RECENT_MATCHES);
+    
+    // Initial build & matrix tabs update
+    const initialChamps = Array.from(new Set(RECENT_MATCHES.map(m => m.champ)));
+    updateBuildChampTabs(initialChamps);
+    updateMatrixChampTabs(initialChamps);
+    
+    if (initialChamps.length > 0) {
+        currentBuildChamp = initialChamps[0];
+        currentMatrixChamp = initialChamps[0];
+        renderChampionBuildDetails(currentBuildChamp, currentBuildSource);
+        renderMatchupMatrix(currentMatrixChamp);
+    }
 });
 
 // Render Match History Feed
@@ -1791,19 +2091,41 @@ function setupSearchForm() {
     const form = document.getElementById("summoner-search-form");
     if (!form) return;
 
+    const searchInput = document.getElementById("search-input");
+    const regionSelect = document.getElementById("search-region");
+    const autocompleteContainer = document.getElementById("search-autocomplete");
+
+    if (regionSelect && searchInput) {
+        const updatePlaceholder = () => {
+            const region = regionSelect.value;
+            searchInput.placeholder = `Nome do jogo + #${region}1`;
+        };
+        updatePlaceholder();
+        regionSelect.addEventListener("change", updatePlaceholder);
+    }
+
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const searchInput = document.getElementById("search-input");
-        const regionSelect = document.getElementById("search-region");
         
         if (!searchInput || !regionSelect) return;
 
-        const query = searchInput.value.trim();
+        let query = searchInput.value.trim();
         const region = regionSelect.value;
 
         if (!query) {
             showToast("Digite o Riot ID no formato Nome#TAG");
             return;
+        }
+
+        // Auto append tag if missing to avoid rejection
+        if (!query.includes("#")) {
+            query = `${query}#${region}1`;
+            searchInput.value = query;
+        }
+
+        // Close dropdown
+        if (autocompleteContainer) {
+            autocompleteContainer.style.display = "none";
         }
 
         // Show updating status
@@ -1818,6 +2140,92 @@ function setupSearchForm() {
             if (submitBtn) submitBtn.disabled = false;
         });
     });
+
+    if (searchInput && autocompleteContainer) {
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.trim();
+            if (!query) {
+                autocompleteContainer.style.display = "none";
+                autocompleteContainer.innerHTML = "";
+                return;
+            }
+
+            autocompleteContainer.innerHTML = "";
+
+            // Find matching mock profiles
+            const matches = Object.keys(MOCK_PROFILES).filter(key => 
+                key.toLowerCase().includes(query.toLowerCase())
+            );
+
+            // Add matched items
+            if (matches.length > 0) {
+                matches.forEach(key => {
+                    const profile = MOCK_PROFILES[key];
+                    const item = document.createElement("div");
+                    item.className = "autocomplete-item";
+                    item.innerHTML = `
+                        <img src="${profile.icon}" class="autocomplete-avatar" alt="Avatar">
+                        <div class="autocomplete-info">
+                            <span class="autocomplete-name">${profile.name} <span style="color:var(--text-muted); font-size:0.75rem;">#${profile.tag}</span></span>
+                            <span class="autocomplete-meta">${profile.tier} - ${profile.lp} LP</span>
+                        </div>
+                        <span class="autocomplete-region">${profile.region}</span>
+                    `;
+                    item.addEventListener("click", () => {
+                        searchInput.value = `${profile.name}#${profile.tag}`;
+                        regionSelect.value = profile.region;
+                        autocompleteContainer.style.display = "none";
+                        form.dispatchEvent(new Event("submit"));
+                    });
+                    autocompleteContainer.appendChild(item);
+                });
+            }
+
+            // Always add a "search new summoner" option
+            const parts = query.split("#");
+            const name = parts[0] ? parts[0].trim() : "";
+            const tag = parts[1] ? parts[1].trim() : "";
+            
+            const newSummonerItem = document.createElement("div");
+            newSummonerItem.className = "autocomplete-item";
+            newSummonerItem.style.borderTop = "1px solid rgba(255,255,255,0.05)";
+            newSummonerItem.innerHTML = `
+                <div class="autocomplete-info">
+                    <span class="autocomplete-name" style="color:var(--primary);"><i data-lucide="search" style="width:14px; height:14px; vertical-align:middle; margin-right:4px;"></i> Buscar invocador: <strong>${name}</strong>${tag ? ` #<strong>${tag}</strong>` : ''}</span>
+                    <span class="autocomplete-meta">Gera perfil de treinamento instantâneo</span>
+                </div>
+                <span class="autocomplete-region">${regionSelect.value}</span>
+            `;
+            
+            newSummonerItem.addEventListener("click", () => {
+                let finalSearch = query;
+                if (!tag) {
+                    finalSearch = `${name}#${regionSelect.value}1`;
+                }
+                searchInput.value = finalSearch;
+                autocompleteContainer.style.display = "none";
+                form.dispatchEvent(new Event("submit"));
+            });
+            autocompleteContainer.appendChild(newSummonerItem);
+
+            lucide.createIcons();
+            autocompleteContainer.style.display = "block";
+        });
+
+        // Dismiss dropdown on clicking outside
+        document.addEventListener("click", (e) => {
+            if (!form.contains(e.target)) {
+                autocompleteContainer.style.display = "none";
+            }
+        });
+
+        // Show dropdown on focus if not empty
+        searchInput.addEventListener("focus", () => {
+            if (searchInput.value.trim()) {
+                searchInput.dispatchEvent(new Event("input"));
+            }
+        });
+    }
 }
 
 // Handle dynamic profile loading (API or procedural mock)
@@ -2099,6 +2507,19 @@ function renderProfile(profile) {
 
     // 5. Update best champions sidebar list
     updateBestChampionsList(profile.matches);
+
+    // Dynamic Tabs Update
+    const champNames = Array.from(new Set(profile.matches.map(m => m.champ)));
+    updateBuildChampTabs(champNames);
+    updateMatrixChampTabs(champNames);
+
+    // Select first champ in builds and matrix
+    if (champNames.length > 0) {
+        currentBuildChamp = champNames[0];
+        currentMatrixChamp = champNames[0];
+        renderChampionBuildDetails(currentBuildChamp, currentBuildSource);
+        renderMatchupMatrix(currentMatrixChamp);
+    }
 
     // 6. Update charts
     updateChartsData(profile);
@@ -2600,4 +3021,165 @@ function renderOtps(champName) {
         container.appendChild(card);
     });
 }
+
+// Added helper functions
+function updateBestChampionsList(matches) {
+    const listContainer = document.querySelector(".champion-list");
+    if (!listContainer) return;
+    listContainer.innerHTML = "";
+
+    // Group matches by champion
+    const champStats = {};
+    matches.forEach(match => {
+        const champ = match.champ;
+        if (!champStats[champ]) {
+            champStats[champ] = {
+                name: champ,
+                icon: match.champImg || `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champ}.png`,
+                games: 0,
+                wins: 0,
+                kills: 0,
+                deaths: 0,
+                assists: 0
+            };
+        }
+        const stats = champStats[champ];
+        stats.games++;
+        if (match.isWin) stats.wins++;
+        stats.kills += match.kills;
+        stats.deaths += match.deaths;
+        stats.assists += match.assists;
+    });
+
+    // Convert to array and sort by games desc, then winrate desc
+    const sortedChamps = Object.values(champStats).sort((a, b) => {
+        if (b.games !== a.games) return b.games - a.games;
+        const wrA = a.wins / a.games;
+        const wrB = b.wins / b.games;
+        return wrB - wrA;
+    });
+
+    sortedChamps.forEach((champ, idx) => {
+        const winrate = ((champ.wins / champ.games) * 100).toFixed(0);
+        const kdaVal = ((champ.kills + champ.assists) / Math.max(1, champ.deaths)).toFixed(2);
+        
+        const row = document.createElement("div");
+        row.className = `champ-row ${idx === 0 ? 'active-champ' : ''}`;
+        row.setAttribute("data-champ-select", champ.name);
+        
+        const winRateClass = parseFloat(winrate) >= 55 ? "text-win" : (parseFloat(winrate) < 48 ? "text-loss" : "");
+        
+        row.innerHTML = `
+            <img src="${champ.icon}" alt="${champ.name}" class="champ-icon">
+            <div class="champ-info">
+                <span class="champ-name">${champ.name}</span>
+                <span class="champ-games">${champ.games} ${champ.games === 1 ? 'Jogo' : 'Jogos'}</span>
+            </div>
+            <div class="champ-stats">
+                <span class="champ-winrate ${winRateClass}">${winrate}% WR</span>
+                <span class="champ-kda">${kdaVal} KDA</span>
+            </div>
+        `;
+        listContainer.appendChild(row);
+    });
+
+    // Rebind clicking events
+    setupSidebarNavigation();
+}
+
+function updateBuildChampTabs(champNames) {
+    const container = document.getElementById("build-champ-tabs");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    champNames.forEach((champ, idx) => {
+        const btn = document.createElement("button");
+        btn.className = `champ-tab-btn ${idx === 0 ? 'active' : ''}`;
+        btn.setAttribute("data-champ", champ);
+        btn.innerHTML = `
+            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champ}.png" alt="${champ}"> ${champ}
+        `;
+        container.appendChild(btn);
+    });
+    
+    // Re-bind build inspector selectors
+    setupBuildInspector();
+}
+
+function updateMatrixChampTabs(champNames) {
+    const container = document.getElementById("matrix-champ-tabs");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    champNames.forEach((champ, idx) => {
+        const btn = document.createElement("button");
+        btn.className = `matrix-tab-btn ${idx === 0 ? 'active' : ''}`;
+        btn.setAttribute("data-matrix-champ", champ);
+        btn.textContent = champ;
+        container.appendChild(btn);
+    });
+    
+    // Re-bind matchup matrix selectors
+    setupMatchupMatrix();
+}
+
+function generateProceduralProfile(name, tag, region) {
+    const champs = ["Kalista", "Zeri", "Jinx", "Kaisa", "Ezreal", "Samira"];
+    
+    // Generate 5 random matches
+    const matches = [];
+    for (let i = 1; i <= 5; i++) {
+        const champ = champs[Math.floor(Math.random() * champs.length)];
+        const isWin = Math.random() > 0.45;
+        const kills = Math.floor(Math.random() * 12) + 2;
+        const deaths = Math.floor(Math.random() * 8) + 1;
+        const assists = Math.floor(Math.random() * 15) + 3;
+        const kda = ((kills + assists) / deaths).toFixed(2);
+        
+        matches.push({
+            id: 200 + i,
+            champ: champ,
+            champImg: `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champ}.png`,
+            level: Math.floor(Math.random() * 5) + 13,
+            isWin: isWin,
+            type: "Solo/Duo",
+            time: `Há ${i} ${i === 1 ? 'dia' : 'dias'}`,
+            kills: kills,
+            deaths: deaths,
+            assists: assists,
+            kdaRatio: kda,
+            kdaBadge: isWin ? (kda > 4 ? "MVP do Jogo" : "Ótimo KDA") : "Derrota Honrada",
+            badgeType: isWin ? (kda > 4 ? "gold" : "blue") : "none",
+            spells: ["SummonerFlash", "SummonerHaste"],
+            items: ["3153", "6672", "3124", "3006", "3085", "3036", "3340"],
+            cs: Math.floor(Math.random() * 100) + 180,
+            csPerMin: (6.5 + Math.random() * 2).toFixed(1),
+            visionScore: Math.floor(Math.random() * 15) + 8,
+            controlWards: Math.floor(Math.random() * 4),
+            coachTitle: "Feedback Procedural",
+            coachText: `Partida de ${champ}. Posicionamento geral aceitável, mas há espaço para otimizar suas rotas de farm no mid-game e evitar ser pego nas transições.`
+        });
+    }
+
+    const tiers = ["Ferro I", "Bronze II", "Prata III", "Ouro I", "Platina II", "Esmeralda III", "Diamante IV", "Mestre"];
+    const tier = tiers[Math.floor(Math.random() * tiers.length)];
+    
+    return {
+        name: name,
+        tag: tag,
+        region: region,
+        level: Math.floor(Math.random() * 500) + 30,
+        role: "Atirador Principal (ADC)",
+        icon: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/" + (Math.floor(Math.random() * 20) + 1) + ".png",
+        tier: tier,
+        lp: Math.floor(Math.random() * 100),
+        wins: Math.floor(Math.random() * 120) + 80,
+        losses: Math.floor(Math.random() * 120) + 80,
+        matches: matches,
+        lpHistory: Array.from({length: 15}, () => Math.floor(Math.random() * 100)),
+        farmDuration: Array.from({length: 5}, () => parseFloat((6.5 + Math.random() * 2.2).toFixed(1))),
+        coachTip: `Perfil gerado proceduralmente para <strong>${name}#${tag}</strong> no servidor <strong>${region}</strong>. Foco em melhorar a consistência de abates e diminuir as mortes desnecessárias nas lutas de dragão.`
+    };
+}
+
 

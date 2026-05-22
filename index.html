@@ -21,18 +21,24 @@
             <div class="header-logo">
                 <span class="logo-accent">RIFT</span><span>COACH</span>
             </div>
-            <div class="header-actions">
-                <form class="summoner-search-form" id="summoner-search-form">
+            
+            <form class="summoner-search-form" id="summoner-search-form" autocomplete="off">
+                <div class="search-input-pill">
                     <select id="search-region" class="search-region-select">
                         <option value="BR" selected>BR</option>
                         <option value="KR">KR</option>
                         <option value="NA">NA</option>
                     </select>
-                    <input type="text" id="search-input" value="Kókó 痛み #red" placeholder="Invocador#TAG">
-                    <button type="submit" class="search-btn" title="Buscar Invocador">
-                        <i data-lucide="search"></i>
-                    </button>
-                </form>
+                    <input type="text" id="search-input" value="Kókó 痛み #red" placeholder="Nome do jogo + #TAG">
+                    <span class="search-gg-logo">.GG</span>
+                </div>
+                <button type="submit" class="search-btn" title="Buscar Invocador">
+                    <i data-lucide="search"></i>
+                </button>
+                <div id="search-autocomplete" class="autocomplete-dropdown"></div>
+            </form>
+
+            <div class="header-actions">
                 <button class="btn btn-secondary" id="api-settings-btn" title="Configurar Riot API">
                     <i data-lucide="settings"></i>
                 </button>
@@ -43,8 +49,8 @@
         <section class="summoner-banner">
             <div class="summoner-profile">
                 <div class="avatar-container">
-                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx Avatar" class="profile-avatar">
-                    <span class="level-badge">284</span>
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/6700.png" alt="Summoner Avatar" class="profile-avatar">
+                    <span class="level-badge">976</span>
                 </div>
                 <div class="summoner-info">
                     <div class="summoner-name-row">
@@ -67,19 +73,21 @@
             <!-- RANK DETAILS -->
             <div class="rank-card">
                 <div class="rank-emblem-container">
-                    <div class="platinum-shield">
-                        <div class="shield-inner"></div>
+                    <div class="platinum-shield" style="background: linear-gradient(135deg, #44a5b8 0%, #a3e3ed 50%, #206b7a 100%); box-shadow: 0 0 15px rgba(255,255,255,0.1);">
+                        <div class="shield-inner">
+                            <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: #a3e3ed; text-shadow: 0 0 8px #a3e3ed;">Pt</span>
+                        </div>
                     </div>
                 </div>
                 <div class="rank-info">
                     <span class="rank-label">Fila Solo/Duo</span>
-                    <h2 class="rank-tier">Platina II</h2>
-                    <p class="rank-lp">45 LP / 120V 109D</p>
-                    <p class="rank-winrate">Taxa de Vitória: <span class="winrate-highlight">52.4%</span></p>
+                    <h2 class="rank-tier">Platina I</h2>
+                    <p class="rank-lp">17 LP / 243V 241D</p>
+                    <p class="rank-winrate">Taxa de Vitória: <span class="winrate-highlight">50.2%</span></p>
                     <div class="progress-container">
-                        <div class="progress-bar" style="width: 45%;"></div>
+                        <div class="progress-bar" style="width: 17%;"></div>
                     </div>
-                    <span class="progress-text">Progresso para Platina I</span>
+                    <span class="progress-text">Progresso para Esmeralda IV</span>
                 </div>
             </div>
 

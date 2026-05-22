@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/summoner", "destination": "/api/summoner.js" },
+    { "source": "/api/league", "destination": "/api/league.js" },
+    { "source": "/api/matches", "destination": "/api/matches.js" },
+    { "source": "/api/match", "destination": "/api/match.js" },
+    { "source": "/api/spectator", "destination": "/api/spectator.js" }
+  ]
+}

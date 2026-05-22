@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kókó 痛み #red - LoL High Elo Coach & Stats</title>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- TOP NAVIGATION BANNER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <span class="logo-accent">RIFT</span><span>COACH</span>
+            </div>
+            <div class="header-actions">
+                <form class="summoner-search-form" id="summoner-search-form">
+                    <select id="search-region" class="search-region-select">
+                        <option value="BR" selected>BR</option>
+                        <option value="KR">KR</option>
+                        <option value="NA">NA</option>
+                    </select>
+                    <input type="text" id="search-input" value="Kókó 痛み #red" placeholder="Invocador#TAG">
+                    <button type="submit" class="search-btn" title="Buscar Invocador">
+                        <i data-lucide="search"></i>
+                    </button>
+                </form>
+                <button class="btn btn-secondary" id="api-settings-btn" title="Configurar Riot API">
+                    <i data-lucide="settings"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- SUMMONER PROFILE HEADER CARD -->
+        <section class="summoner-banner">
+            <div class="summoner-profile">
+                <div class="avatar-container">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx Avatar" class="profile-avatar">
+                    <span class="level-badge">284</span>
+                </div>
+                <div class="summoner-info">
+                    <div class="summoner-name-row">
+                        <h1>Kókó 痛み</h1>
+                        <span class="tagline">#red</span>
+                        <span class="server-tag">BR</span>
+                    </div>
+                    <p class="role-subtitle"><i data-lucide="crosshair"></i> Atirador Principal (ADC)</p>
+                    <div class="summoner-actions">
+                        <button class="btn btn-primary" id="update-btn">
+                            <i data-lucide="refresh-cw" class="icon-spin"></i> Sincronizar API
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i data-lucide="share-2"></i> Compartilhar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RANK DETAILS -->
+            <div class="rank-card">
+                <div class="rank-emblem-container">
+                    <div class="platinum-shield">
+                        <div class="shield-inner"></div>
+                    </div>
+                </div>
+                <div class="rank-info">
+                    <span class="rank-label">Fila Solo/Duo</span>
+                    <h2 class="rank-tier">Platina II</h2>
+                    <p class="rank-lp">45 LP / 120V 109D</p>
+                    <p class="rank-winrate">Taxa de Vitória: <span class="winrate-highlight">52.4%</span></p>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 45%;"></div>
+                    </div>
+                    <span class="progress-text">Progresso para Platina I</span>
+                </div>
+            </div>
+
+            <!-- QUICK STATISTICS -->
+            <div class="quick-stats-grid">
+                <div class="quick-stat-box">
+                    <span class="stat-title">Últimos 20 Jogos</span>
+                    <div class="stat-value-container">
+                        <span class="stat-value text-win">55% WR</span>
+                    </div>
+                    <span class="stat-sub">11 Vitórias / 9 Derrotas</span>
+                </div>
+                <div class="quick-stat-box">
+                    <span class="stat-title">Média de Farm (CS)</span>
+                    <div class="stat-value-container">
+                        <span class="stat-value text-vision">6.8 <span class="unit">CS/min</span></span>
+                    </div>
+                    <span class="stat-sub">Média: 215 CS por partida</span>
+                </div>
+                <div class="quick-stat-box">
+                    <span class="stat-title">Média de KDA</span>
+                    <div class="stat-value-container">
+                        <span class="stat-value">2.90</span>
+                    </div>
+                    <span class="stat-sub text-kda"><span class="k">6.4</span> / <span class="d">5.2</span> / <span class="a">8.7</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN LAYOUT -->
+        <div class="dashboard-layout">
+            <!-- LEFT SIDEBAR: CHAMPION STATS -->
+            <aside class="sidebar">
+                <div class="card champions-card">
+                    <h3 class="card-title"><i data-lucide="swords"></i> Seus Melhores ADCs</h3>
+                    <div class="champion-list">
+                        <!-- Jinx -->
+                        <div class="champ-row active-champ" data-champ-select="Jinx">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Jinx</span>
+                                <span class="champ-games">75 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-win">62.0%</span>
+                                <span class="champ-kda">3.20 KDA</span>
+                            </div>
+                        </div>
+                        <!-- Kai'Sa -->
+                        <div class="champ-row" data-champ-select="Kaisa">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kaisa.png" alt="Kai'Sa" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Kai'Sa</span>
+                                <span class="champ-games">40 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-win">58.0%</span>
+                                <span class="champ-kda">3.10 KDA</span>
+                            </div>
+                        </div>
+                        <!-- Ezreal -->
+                        <div class="champ-row" data-champ-select="Ezreal">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ezreal.png" alt="Ezreal" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Ezreal</span>
+                                <span class="champ-games">55 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-win">52.0%</span>
+                                <span class="champ-kda">2.75 KDA</span>
+                            </div>
+                        </div>
+                        <!-- Samira -->
+                        <div class="champ-row" data-champ-select="Samira">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Samira.png" alt="Samira" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Samira</span>
+                                <span class="champ-games">30 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-win">55.0%</span>
+                                <span class="champ-kda">2.90 KDA</span>
+                            </div>
+                        </div>
+                        <!-- Lucian -->
+                        <div class="champ-row" data-champ-select="Lucian">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Lucian.png" alt="Lucian" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Lucian</span>
+                                <span class="champ-games">22 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-loss">47.0%</span>
+                                <span class="champ-kda">2.10 KDA</span>
+                            </div>
+                        </div>
+                        <!-- Vayne -->
+                        <div class="champ-row" data-champ-select="Vayne">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Vayne.png" alt="Vayne" class="champ-icon">
+                            <div class="champ-info">
+                                <span class="champ-name">Vayne</span>
+                                <span class="champ-games">15 Jogos</span>
+                            </div>
+                            <div class="champ-stats">
+                                <span class="champ-winrate text-loss">40.0%</span>
+                                <span class="champ-kda">1.85 KDA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK TIP BOX -->
+                <div class="card tip-card">
+                    <div class="tip-header">
+                        <i data-lucide="sparkles" class="text-gold"></i>
+                        <h4>Conselho do Coach</h4>
+                    </div>
+                    <p>Sua **Jinx (62%)** e sua **Kai'Sa (58%)** são escolhas de elo Diamante! Porém, jogar de **Lucian (47%)** e **Vayne (40%)** drena seu PDL ganho. Remova-os da fila ranqueada para subir rápido.</p>
+                </div>
+            </aside>
+
+            <!-- RIGHT CONTENT AREA -->
+            <main class="content-area">
+                <!-- TABS CONTAINER -->
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-overview">
+                        <i data-lucide="layout-dashboard"></i> Histórico & Dicas
+                    </button>
+                    <button class="tab-btn" data-tab="tab-builds">
+                        <i data-lucide="book-open"></i> Builds de Pro & OTPs
+                    </button>
+                    <button class="tab-btn" data-tab="tab-coach">
+                        <i data-lucide="graduation-cap"></i> Diagnóstico de Subida
+                    </button>
+                    <button class="tab-btn" data-tab="tab-live-match" id="live-match-tab-btn">
+                        <i data-lucide="activity"></i> Partida Ao Vivo
+                    </button>
+                    <button class="tab-btn" data-tab="tab-leaderboards">
+                        <i data-lucide="trophy"></i> Leaderboards & OTPs
+                    </button>
+                </nav>
+
+                <!-- TAB CONTENT: OVERVIEW (MATCHES) -->
+                <section class="tab-content active" id="tab-overview">
+                    <div class="form-container card">
+                        <h3 class="card-title"><i data-lucide="history"></i> Partidas Recentes e Feedback Técnico</h3>
+                        <div class="match-history-feed" id="match-feed">
+                            <!-- Filled dynamically by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB CONTENT: BUILDS, RUNAS & SKILLS -->
+                <section class="tab-content" id="tab-builds">
+                    <!-- Champion Selector Bar -->
+                    <div class="card build-selector-card">
+                        <h3 class="card-title"><i data-lucide="sliders"></i> Analisador de Builds e Habilidades</h3>
+                        <p class="card-description">Selecione o campeão e a fonte dos dados (Top 100 Challengers ou OTPs Monos do ITPK DeepLoL).</p>
+                        
+                        <div class="build-selectors-wrapper">
+                            <!-- Champ Selection -->
+                            <div class="build-champion-tabs" id="build-champ-tabs">
+                                <button class="champ-tab-btn active" data-champ="Jinx">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx"> Jinx
+                                </button>
+                                <button class="champ-tab-btn" data-champ="Kaisa">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kaisa.png" alt="Kai'Sa"> Kai'Sa
+                                </button>
+                                <button class="champ-tab-btn" data-champ="Ezreal">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ezreal.png" alt="Ezreal"> Ezreal
+                                </button>
+                                <button class="champ-tab-btn" data-champ="Samira">
+                                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Samira.png" alt="Samira"> Samira
+                                </button>
+                            </div>
+
+                            <!-- Source Selection -->
+                            <div class="build-source-selector">
+                                <span class="source-label">Fonte de Dados:</span>
+                                <div class="source-buttons" id="build-source-tabs">
+                                    <button class="source-tab-btn active" data-source="KR">
+                                        <span class="flag-icon">🇰🇷</span> DeepLoL ITPK (Monos KR)
+                                    </button>
+                                    <button class="source-tab-btn" data-source="BR">
+                                        <span class="flag-icon">🇧🇷</span> Challenger BR (Top 100)
+                                    </button>
+                                    <button class="source-tab-btn" data-source="NA">
+                                        <span class="flag-icon">🇺🇸</span> High Elo NA (Champion.gg)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RUNAS, SKILLS & BUILD CONTAINER -->
+                    <div class="builds-grid" id="build-details-container">
+                        <!-- Loaded dynamically by JS -->
+                    </div>
+
+                    <!-- SYNERGY WITH SUPPORTS SECTION -->
+                    <div class="card synergy-card">
+                        <h3 class="card-title"><i data-lucide="heart-handshake"></i> Melhores Suportes de Parceria (Sua Sinergia)</h3>
+                        <p class="card-description">Taxa de vitória e estilo de jogo recomendado jogando com estes suportes ao seu lado no Bot.</p>
+                        
+                        <div class="synergy-supports-list" id="synergy-supports-container">
+                            <!-- Filled dynamically by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB CONTENT: DIAGNOSTIC & COUNTERS -->
+                <section class="tab-content" id="tab-coach">
+                    <!-- INTRO CARD -->
+                    <div class="card intro-coach-card">
+                        <div class="coach-avatar-circle">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <div class="coach-welcome">
+                            <h3>Por que você está oscilando no Platina II de ADC?</h3>
+                            <p>Análise comportamental e estatística de <strong>Kókó 痛み</strong>. Focamos nos maiores counters de ADC, nas side lanes e em dicas para parar de oscilar nas ligas.</p>
+                        </div>
+                    </div>
+
+                    <!-- CHARTS CONTAINER -->
+                    <div class="charts-grid">
+                        <!-- Rank Oscillation Chart -->
+                        <div class="card chart-card">
+                            <h4 class="chart-title"><i data-lucide="trending-up"></i> Oscilação de PDL (LP) - Últimos 30 dias</h4>
+                            <p class="chart-desc">Demonstração visual do ciclo de subir para Platina I e cair para Platina III.</p>
+                            <div id="lp-chart" class="chart-container"></div>
+                            <div class="chart-explanation">
+                                <i data-lucide="alert-triangle" class="text-gold"></i>
+                                <span>Você sobe rápido quando joga de **Jinx** e **Kai'Sa** consecutivos. A queda para o Plat III acontece no momento em que você perde 1 jogo e começa a mudar para Lucian/Vayne ou a farmar menos nas laterais.</span>
+                            </div>
+                        </div>
+
+                        <!-- CS/Min Farm Chart -->
+                        <div class="card chart-card">
+                            <h4 class="chart-title"><i data-lucide="leaf"></i> Seu CS/Min por Duração de Partida (ADC)</h4>
+                            <p class="chart-desc">Comparação com a média ideal para elo Diamante IV+.</p>
+                            <div id="farm-chart" class="chart-container"></div>
+                            <div class="chart-explanation">
+                                <i data-lucide="trending-down" class="text-loss"></i>
+                                <span>Você começa a rota farmando muito bem (7.8 CS/min). Mas após os 15 minutos, seu farm cai para **4.8 CS/min**. Como ADC, o farm no mid-game é o que dita seu dano nas lutas do Barão/Dragão.</span>
+                            </div>
+                        </div>
+
+                        <!-- GPI Radar Chart -->
+                        <div class="card chart-card">
+                            <h4 class="chart-title"><i data-lucide="compass"></i> Índice de Performance do Jogador (GPI)</h4>
+                            <p class="chart-desc">Comparação de 6 pilares de performance vs média de ADC Diamante IV.</p>
+                            <div id="gpi-radar-chart" class="chart-container"></div>
+                            <div class="chart-explanation">
+                                <i data-lucide="sparkles" class="text-gold"></i>
+                                <span id="gpi-explanation-text">Seu foco em **Combate** e **Farm** é excelente. A sua maior falha é a **Sobrevivência** no mid-game e a **Visão**, que estão abaixo da média de ADCs do Diamante.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MATCHUP PERFORMANCE MATRIX (NEW INTERACTIVE TABLE) -->
+                    <div class="card matchup-matrix-card">
+                        <h3 class="card-title"><i data-lucide="swords"></i> Matriz de Enfrentamento Direto (Seu Desempenho vs ADCs Inimigos)</h3>
+                        <p class="card-description">Análise de quais campeões você mais ganha ou perde ao jogar contra na rota. Clique nos botões para alternar.</p>
+                        
+                        <div class="matrix-tabs-container">
+                            <div class="matrix-champ-tabs" id="matrix-champ-tabs">
+                                <button class="matrix-tab-btn active" data-matrix-champ="Jinx">Jinx</button>
+                                <button class="matrix-tab-btn" data-matrix-champ="Kaisa">Kai'Sa</button>
+                                <button class="matrix-tab-btn" data-matrix-champ="Ezreal">Ezreal</button>
+                                <button class="matrix-tab-btn" data-matrix-champ="Samira">Samira</button>
+                            </div>
+                        </div>
+
+                        <div class="matrix-table-wrapper">
+                            <table class="matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th>Campeão Inimigo</th>
+                                        <th>Seu Winrate</th>
+                                        <th>Dificuldade</th>
+                                        <th>Dica do Coach de como Vencer</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="matrix-table-body">
+                                    <!-- Populated dynamically by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- WORST MATCHUPS & COUNTERS BLOCK -->
+                    <div class="card matchups-card">
+                        <h3 class="card-title"><i data-lucide="skull"></i> Ameaças no Jogo (Sua Maior Dificuldade nas Lutas)</h3>
+                        <p class="card-description">Oponentes que não estão na sua rota mas anulam seu impacto no jogo.</p>
+                        
+                        <div class="counters-layout-grid">
+                            <!-- Teamfight Counters -->
+                            <div class="counter-column" style="grid-column: 1 / 3;">
+                                <div class="matchups-grid">
+                                    <div class="matchup-item loss-border">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Nocturne.png" alt="Nocturne" class="matchup-icon">
+                                        <div class="matchup-details">
+                                            <h4>Nocturne <span class="bad-winrate">(38% Winrate)</span></h4>
+                                            <p>A ultimate dele tira sua visão e te isola. Ele pula direto em você. <strong>Dica:</strong> Fique ao lado de suportes tanques (Nautilus/Leona) e construa *Limiar da Noite (Edge of Night)* ou *Anjo Guardião (GA)*.</p>
+                                        </div>
+                                    </div>
+                                    <div class="matchup-item loss-border">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Zed.png" alt="Zed" class="matchup-icon">
+                                        <div class="matchup-details">
+                                            <h4>Zed <span class="bad-winrate">(42% Winrate)</span></h4>
+                                            <p>Consegue te flanquear e explodir em segundos com a marca da morte. <strong>Dica:</strong> Peça exaustão para seu suporte. Faça *Arco-Escudo Imortal* ou *Ampulheta de Zhonya* (como último item de Kai'Sa) para quebrar o burst dele.</p>
+                                        </div>
+                                    </div>
+                                    <div class="matchup-item loss-border">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Hecarim.png" alt="Hecarim" class="matchup-icon">
+                                        <div class="matchup-details">
+                                            <h4>Hecarim <span class="bad-winrate">(40% Winrate)</span></h4>
+                                            <p>Passa correndo pelas linhas de frente com imunidade de CC e te atropela. <strong>Dica:</strong> Posicione-se atrás de paredes espessas e só apareça na luta depois que ele usar a investida sombria (R).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TECHNICAL DIAGNOSIS ACCORDION (ADC CLINIC) -->
+                    <div class="card diagnosis-details-card">
+                        <h3 class="card-title"><i data-lucide="activity"></i> Por que você está preso e oscilando no Platina II?</h3>
+                        
+                        <div class="diagnosis-accordion-list">
+                            <!-- Problem 1 -->
+                            <div class="diag-accordion-item active-diag">
+                                <div class="diag-header">
+                                    <div class="diag-header-title">
+                                        <span class="diag-number">1</span>
+                                        <h4>Over-Grouping (Aramzão no Mid) e Queda de Farm</h4>
+                                    </div>
+                                    <i data-lucide="chevron-down" class="diag-chevron"></i>
+                                </div>
+                                <div class="diag-body">
+                                    <p>Como ADC, após a queda da primeira torre bot, você costuma ir para o meio e ficar lá indefinidamente. Isso divide ouro e XP com seu Mid e Jungle, além de deixar ondas de minion ricas morrerem nas side lanes para as torres de forma desnecessária.</p>
+                                    <div class="solution-box-diag">
+                                        <h5><i data-lucide="check-circle" class="text-win"></i> Plano de Ação:</h5>
+                                        <p>Após levar a primeira torre ou após os 15 minutos, se o seu Midlaner tiver teleportar (TP), peça para ele ficar na side lane. Se você tiver de Jinx ou Kai'Sa, empurre a rota lateral de forma segura até a linha do meio do mapa, recolha o farm e depois agrupe com o time. Nunca deixe ondas de minions baterem nas suas torres.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Problem 2 -->
+                            <div class="diag-accordion-item">
+                                <div class="diag-header">
+                                    <div class="diag-header-title">
+                                        <span class="diag-number">2</span>
+                                        <h4>Champion Pool sem Foco (Fator Lucian e Vayne)</h4>
+                                    </div>
+                                    <i data-lucide="chevron-down" class="diag-chevron"></i>
+                                </div>
+                                <div class="diag-body">
+                                    <p>O gráfico de oscilação demonstra que seus ganhos expressivos de LP ocorrem com **Jinx (62% WR)**. Porém, ao perder um jogo, o tilt faz com que você queira escolher Lucian ou Vayne, campeões de curto alcance e alta complexidade, onde sua winrate é de 47% e 40% respectivamente. Isso causa um cancelamento imediato de seus ganhos de PDL.</p>
+                                    <div class="solution-box-diag">
+                                        <h5><i data-lucide="check-circle" class="text-win"></i> Plano de Ação:</h5>
+                                        <p>Jogue apenas de Jinx (sua principal escolha para carregar no late game) e Kai'Sa (ótima para dives e lidar com assassinos). Deixe o Lucian e Vayne para jogos casuais fora das ranqueadas.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Problem 3 -->
+                            <div class="diag-accordion-item">
+                                <div class="diag-header">
+                                    <div class="diag-header-title">
+                                        <span class="diag-number">3</span>
+                                        <h4>Falta de Peer-Peel / Posicionamento Agressivo sem Visão</h4>
+                                    </div>
+                                    <i data-lucide="chevron-down" class="diag-chevron"></i>
+                                </div>
+                                <div class="diag-body">
+                                    <p>Muitas das suas mortes de Jinx acontecem porque você tenta aplicar auto-ataques logo no início da luta em alvos secundários sem saber onde o assassino inimigo (como o Zed ou Nocturne) está. Você entra no alcance deles e morre nos primeiros 3 segundos da luta de equipe.</p>
+                                    <div class="solution-box-diag">
+                                        <h5><i data-lucide="check-circle" class="text-win"></i> Plano de Ação:</h5>
+                                        <p>Em lutas de equipe, **espere o assassino inimigo gastar a habilidade principal** (como a ult do Nocturne ou Zed) em outra pessoa antes de você aparecer e bater. Bater no tanque inimigo mais próximo de forma segura é melhor do que morrer tentando acertar o atirador deles.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB CONTENT: LIVE MATCH SPECTATE (BLITZ/LOLSUMO STYLE) -->
+                <section class="tab-content" id="tab-live-match">
+                    <!-- Live Header Status -->
+                    <div class="card live-status-card">
+                        <div class="live-status-header">
+                            <div class="live-indicator">
+                                <span class="pulsing-dot"></span>
+                                <span class="live-status-text">Partida em Andamento (Solo/Duo)</span>
+                            </div>
+                            <div class="live-timer-container">
+                                <i data-lucide="clock"></i>
+                                <span id="live-game-timer">00:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CS/Min Telemetry Widget -->
+                    <div class="card live-cs-widget-card">
+                        <h3 class="card-title"><i data-lucide="gauge"></i> Telemetria de Farm Real-Time (vs Pro Target)</h3>
+                        <p class="card-description">Seu rendimento atual em relação ao ideal de 8.0 CS/min para subir de elo.</p>
+                        
+                        <div class="live-cs-comparison-bar-wrapper">
+                            <div class="cs-metric-label">
+                                <span>Seu Farm: <strong id="live-player-cs">0</strong> CS (<span id="live-player-cs-per-min">0.0</span>/min)</span>
+                                <span>Alvo Diamante+: <strong id="live-target-cs">0</strong> CS (8.0/min)</span>
+                            </div>
+                            <div class="cs-progress-track">
+                                <div class="cs-progress-bar-fill" id="live-cs-progress" style="width: 0%;"></div>
+                            </div>
+                            <div class="cs-progress-status-text" id="live-cs-status-feedback">
+                                Sincronizando dados com o jogo...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teams 5v5 Split Grid -->
+                    <div class="live-match-grid">
+                        <!-- Blue Team -->
+                        <div class="card live-team-column blue-team-col">
+                            <h4 class="live-team-title blue-team-title"><span class="team-dot blue-dot"></span> Time Azul (Aliados)</h4>
+                            <div class="live-players-list" id="blue-team-players">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Red Team -->
+                        <div class="card live-team-column red-team-col">
+                            <h4 class="live-team-title red-team-title"><span class="team-dot red-dot"></span> Time Vermelho (Inimigos)</h4>
+                            <div class="live-players-list" id="red-team-players">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB CONTENT: GLOBAL LEADERBOARDS & OTP EXPLORER (DEEPLOL ITPK STYLE) -->
+                <section class="tab-content" id="tab-leaderboards">
+                    <div class="leaderboard-grid">
+                        <!-- Left Panel: Top 10 Challengers -->
+                        <div class="card leaderboard-card">
+                            <div class="leaderboard-header-row">
+                                <h3 class="card-title" style="margin-bottom:0;"><i data-lucide="trophy"></i> Top 10 Desafiantes</h3>
+                                <div class="leaderboard-region-tabs" id="leaderboard-region-tabs">
+                                    <button class="lead-tab-btn active" data-lead-region="KR">KR</button>
+                                    <button class="lead-tab-btn" data-lead-region="BR">BR</button>
+                                    <button class="lead-tab-btn" data-lead-region="NA">NA</button>
+                                </div>
+                            </div>
+                            <p class="card-description" style="margin-top: 0.5rem;">Os melhores jogadores da fila ranqueada solo de cada servidor.</p>
+
+                            <div class="matrix-table-wrapper">
+                                <table class="matrix-table leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Posição</th>
+                                            <th>Invocador</th>
+                                            <th>PDL (LP)</th>
+                                            <th>Taxa de Vitória</th>
+                                            <th>Campeões Mais Jogados</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="leaderboard-table-body">
+                                        <!-- Populated dynamically by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: OTP Champion Explorer -->
+                        <div class="card otp-explorer-card">
+                            <h3 class="card-title"><i data-lucide="user-check"></i> Explorador de OTPs (Monos) & ITPK</h3>
+                            <p class="card-description">Selecione o campeão para ver os builds e estatísticas de OTPs globais.</p>
+                            
+                            <div class="otp-champ-tabs" id="otp-champ-tabs" style="display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+                                <button class="otp-tab-btn active" data-otp-champ="Jinx"><img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Jinx.png" alt="Jinx" style="width:20px; height:20px; border-radius:50%;"> Jinx</button>
+                                <button class="otp-tab-btn" data-otp-champ="Kaisa"><img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Kaisa.png" alt="Kai'Sa" style="width:20px; height:20px; border-radius:50%;"> Kai'Sa</button>
+                                <button class="otp-tab-btn" data-otp-champ="Ezreal"><img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Ezreal.png" alt="Ezreal" style="width:20px; height:20px; border-radius:50%;"> Ezreal</button>
+                                <button class="otp-tab-btn" data-otp-champ="Samira"><img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Samira.png" alt="Samira" style="width:20px; height:20px; border-radius:50%;"> Samira</button>
+                            </div>
+
+                            <div class="otp-results-container" id="otp-results-container">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- API SETTINGS MODAL -->
+        <div id="api-modal" class="modal-overlay">
+            <div class="modal-content card">
+                <h3 class="card-title"><i data-lucide="key"></i> Configurações da Riot API</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.45;">
+                    Insira sua chave de desenvolvedor da Riot Games para sincronizar dados **reais** de partidas e ranks. Obtenha grátis em <a href="https://developer.riotgames.com/" target="_blank" style="color: var(--primary); text-decoration: underline;">developer.riotgames.com</a> (login com sua conta Riot).
+                </p>
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <label for="api-key-input" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Riot API Key (RGAPI-xxx):</label>
+                    <input type="password" id="api-key-input" placeholder="Cole sua RGAPI-XXXX-XXXX-XXXX-XXXX" style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.7rem 0.9rem; color: var(--text-main); font-family: monospace; outline: none; width: 100%; font-size: 0.9rem;">
+                </div>
+                <div class="modal-actions" style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+                    <button class="btn btn-secondary" id="api-modal-close">Fechar</button>
+                    <button class="btn btn-primary" id="api-modal-save">Salvar Chave</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>&copy; 2026 RiftCoach. Dados simulados com base nas estatísticas das plataformas Champion.gg, DeepLoL e OP.GG para o invocador Kókó 痛み#red. Desenvolvido para ajudar no climbing.</p>
+        </footer>
+    </div>
+
+    <!-- Main JavaScript App -->
+    <script src="app.js"></script>
+</body>
+</html>

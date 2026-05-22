@@ -224,7 +224,7 @@ const MOCK_PROFILES = {
         region: "BR",
         level: 976,
         role: "Atirador Principal (ADC)",
-        icon: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/6700.png",
+        icon: "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/588.png",
         tier: "Platina I",
         lp: 17,
         wins: 243,

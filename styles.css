@@ -2009,3 +2009,10 @@ body {
     font-weight: 700;
     color: var(--gold);
 }
+
+.otp-champ-select:hover,
+.otp-champ-select:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 8px var(--border-glow);
+}
+

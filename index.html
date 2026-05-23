@@ -564,7 +564,13 @@
 
                         <!-- Right Panel: OTP Champion Explorer -->
                         <div class="card otp-explorer-card">
-                            <h3 class="card-title"><i data-lucide="user-check"></i> Explorador de OTPs (Monos) & ITPK</h3>
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:0.5rem;">
+                                <h3 class="card-title" style="margin:0;"><i data-lucide="user-check"></i> Explorador de OTPs (Monos) & ITPK</h3>
+                                <select class="otp-champ-select" id="otp-champ-select" style="background:rgba(21, 27, 38, 0.7); border:1px solid var(--border-color); color:var(--text-main); padding:0.4rem 1rem; border-radius:6px; outline:none; font-size:0.85rem; cursor:pointer; font-family:var(--font-heading); font-weight:600; transition: border-color 0.2s;">
+                                    <option value="" disabled selected>Selecionar Campeão...</option>
+                                    <!-- Options populated dynamically -->
+                                </select>
+                            </div>
                             <p class="card-description">Selecione o campeão para ver os builds e estatísticas de OTPs globais.</p>
                             
                             <div class="otp-champ-tabs" id="otp-champ-tabs" style="display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap;">

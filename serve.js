@@ -129,6 +129,29 @@ http.createServer((req, res) => {
             return;
         }
 
+        if (pathname === '/api/deeplol-otps') {
+            const deeplolOtps = require('./api/deeplol-otps.js');
+            const mockReq = {
+                query: {
+                    champion: params.get('champion')
+                },
+                method: req.method
+            };
+            const mockRes = {
+                statusCode: 200,
+                status(code) {
+                    this.statusCode = code;
+                    return this;
+                },
+                json(data) {
+                    res.writeHead(this.statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+                    res.end(JSON.stringify(data));
+                }
+            };
+            deeplolOtps(mockReq, mockRes);
+            return;
+        }
+
         if (pathname === '/api/summoner') {
             const region = params.get('region') || 'BR';
             const name = params.get('name');

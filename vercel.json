@@ -18,6 +18,7 @@
     { "source": "/api/match", "destination": "/api/match.js" },
     { "source": "/api/spectator", "destination": "/api/spectator.js" },
     { "source": "/api/summoner-opgg", "destination": "/api/summoner-opgg.js" },
-    { "source": "/api/champion-build", "destination": "/api/champion-build.js" }
+    { "source": "/api/champion-build", "destination": "/api/champion-build.js" },
+    { "source": "/api/deeplol-otps", "destination": "/api/deeplol-otps.js" }
   ]
 }

@@ -1774,23 +1774,9 @@ function renderChampionBuildDetails(champName, sourceName = "KR") {
                     <p style="font-size: 0.8rem; margin-top: 0.5rem;">${err.message || ""}</p>
                 </div>
             `;
-            lucide.createIcons();
         });
-}   <span class="sup-card-name">${sup.name}</span>
-                        <span class="sup-card-wr">${sup.winrate} Winrate</span>
-                    </div>
-                    <span class="sup-card-strength ${badgeColor}" style="margin-left: auto;">${sup.label}</span>
-                </div>
-                <p class="sup-card-desc">${sup.desc}</p>
-            </div>
-        `;
-    });
-    synergyContainer.innerHTML = synergyHTML;
+};
 
-    lucide.createIcons();
-}
-
-// Matchup Matrix Tab Handling
 function setupMatchupMatrix() {
     const matrixTabs = document.querySelectorAll("#matrix-champ-tabs .matrix-tab-btn");
     

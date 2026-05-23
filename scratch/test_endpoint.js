@@ -34,6 +34,13 @@ async function run() {
         console.log(`Itens Iniciais:`, build.items.starting.map(i => i.name));
         console.log(`Itens Core:`, build.items.core.map(i => i.name));
         
+        console.log("\n=== TESTANDO DEEPLOL OTPS SCRAPER PROXY ===");
+        const otps = await getJson('http://localhost:8080/api/deeplol-otps?champion=Jinx');
+        console.log(`Sucesso! Encontrados ${otps.length} OTPs para Jinx:`);
+        otps.forEach(otp => {
+            console.log(`- ${otp.name}#${otp.tag || ''} | Rank: ${otp.rank} | WR: ${otp.winrate} | ${otp.games} | Build: ${otp.buildNames.join(', ')}`);
+        });
+
         console.log("\n=== TODOS OS TESTES PASSARAM COM SUCESSO! ===");
     } catch (e) {
         console.error("ERRO NO TESTE:", e);
@@ -41,3 +48,4 @@ async function run() {
 }
 
 run();
+

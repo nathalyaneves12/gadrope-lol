@@ -1,10 +1,23 @@
 {
   "version": 2,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, max-age=0"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/api/summoner", "destination": "/api/summoner.js" },
     { "source": "/api/league", "destination": "/api/league.js" },
     { "source": "/api/matches", "destination": "/api/matches.js" },
     { "source": "/api/match", "destination": "/api/match.js" },
-    { "source": "/api/spectator", "destination": "/api/spectator.js" }
+    { "source": "/api/spectator", "destination": "/api/spectator.js" },
+    { "source": "/api/summoner-opgg", "destination": "/api/summoner-opgg.js" },
+    { "source": "/api/champion-build", "destination": "/api/champion-build.js" }
   ]
 }

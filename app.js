@@ -1324,6 +1324,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Render Lucide Icons
     lucide.createIcons();
 
+    // Render profile model
+    renderProfile(currentProfile);
+
     // Render components
     renderMatchHistory();
     setupTabNavigation();
@@ -1526,18 +1529,16 @@ function setupBuildInspector() {
     renderChampionBuildDetails(currentBuildChamp, currentBuildSource);
 }
 
+const buildCache = {};
+
 function renderChampionBuildDetails(champName, sourceName = "KR") {
     const detailsContainer = document.getElementById("build-details-container");
     const synergyContainer = document.getElementById("synergy-supports-container");
     
     if (!detailsContainer || !synergyContainer) return;
 
-    const champData = CHAMP_BUILDS_DATABASE[champName];
-    if (!champData) return;
-
-    const data = champData[sourceName];
-    if (!data) return;
-
+    const cacheKey = `${champName}_${sourceName}`;
+    
     const sourceLabelMap = {
         KR: "KR OTP (DeepLoL ITPK)",
         BR: "BR Challenger (Top 100)",
@@ -1545,170 +1546,237 @@ function renderChampionBuildDetails(champName, sourceName = "KR") {
     };
     const regionText = sourceLabelMap[sourceName];
 
-    // 1. Runes HTML
-    let runeSlotsHTML = "";
-    data.runes.slots.forEach(r => {
-        runeSlotsHTML += `
-            <div class="rune-item-row">
-                <i data-lucide="check-circle-2" class="text-gold" style="width:14px; height:14px;"></i>
-                <span>${r.name}</span>
-            </div>
-        `;
-    });
-    let secRuneSlotsHTML = "";
-    data.runes.secondarySlots.forEach(r => {
-        secRuneSlotsHTML += `
-            <div class="rune-item-row">
-                <i data-lucide="check-circle-2" class="text-vision" style="width:14px; height:14px;"></i>
-                <span>${r.name}</span>
-            </div>
-        `;
-    });
+    // Helper function to render data
+    const renderData = (data) => {
+        // 1. Runes HTML
+        let runeSlotsHTML = "";
+        data.runes.slots.forEach(r => {
+            runeSlotsHTML += `
+                <div class="rune-item-row">
+                    <i data-lucide="check-circle-2" class="text-gold" style="width:14px; height:14px;"></i>
+                    <span>${r.name}</span>
+                </div>
+            `;
+        });
+        let secRuneSlotsHTML = "";
+        data.runes.secondarySlots.forEach(r => {
+            secRuneSlotsHTML += `
+                <div class="rune-item-row">
+                    <i data-lucide="check-circle-2" class="text-vision" style="width:14px; height:14px;"></i>
+                    <span>${r.name}</span>
+                </div>
+            `;
+        });
 
-    // 2. Skill Grid HTML
-    const skillLetters = ["Q", "W", "E", "R"];
-    let skillGridHTML = "";
-    for (let r = 0; r < 4; r++) {
-        let blocks = "";
-        for (let lvl = 0; lvl < 18; lvl++) {
-            const isActive = data.skills.grid[r][lvl] === 1;
-            const activeClass = isActive ? "active-level" : "";
-            const content = isActive ? (lvl + 1) : "";
-            blocks += `<div class="skill-box-num ${activeClass}">${content}</div>`;
+        // 2. Skill Grid HTML
+        const skillLetters = ["Q", "W", "E", "R"];
+        let skillGridHTML = "";
+        for (let r = 0; r < 4; r++) {
+            let blocks = "";
+            for (let lvl = 0; lvl < 18; lvl++) {
+                const isActive = data.skills.grid[r][lvl] === 1;
+                const activeClass = isActive ? "active-level" : "";
+                const content = isActive ? (lvl + 1) : "";
+                blocks += `<div class="skill-box-num ${activeClass}">${content}</div>`;
+            }
+            skillGridHTML += `
+                <div class="skill-row-container ${skillLetters[r].toLowerCase()}-row">
+                    <span class="skill-letter">${skillLetters[r]}</span>
+                    <div class="skill-blocks">${blocks}</div>
+                </div>
+            `;
         }
-        skillGridHTML += `
-            <div class="skill-row-container ${skillLetters[r].toLowerCase()}-row">
-                <span class="skill-letter">${skillLetters[r]}</span>
-                <div class="skill-blocks">${blocks}</div>
+
+        // 3. Items HTML
+        let startingItemsHTML = "";
+        data.items.starting.forEach(item => {
+            startingItemsHTML += `
+                <div class="stage-item-card">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item" onerror="this.onerror=null; this.src='https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/1055.png';">
+                    <div class="stage-item-info">
+                        <span class="stage-item-name">${item.name}</span>
+                        <span class="stage-item-cost">${item.cost} Ouro</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        let coreItemsHTML = "";
+        data.items.core.forEach(item => {
+            coreItemsHTML += `
+                <div class="stage-item-card">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item" onerror="this.onerror=null; this.src='https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/3006.png';">
+                    <div class="stage-item-info">
+                        <span class="stage-item-name">${item.name}</span>
+                        <span class="stage-item-cost">${item.cost} Ouro</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        let situationalItemsHTML = "";
+        data.items.situational.forEach(item => {
+            situationalItemsHTML += `
+                <div class="stage-item-card">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item" onerror="this.onerror=null; this.src='https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/3072.png';">
+                    <div class="stage-item-info">
+                        <span class="stage-item-name">${item.name}</span>
+                        <span class="stage-item-cost">${item.cost} Ouro</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Populate Master Inspector Grid
+        detailsContainer.innerHTML = `
+            <!-- Left: Runes & Skills -->
+            <div class="card build-runes-skills-card">
+                <h4 class="chart-title"><i data-lucide="shield-check"></i> Runas Recomendadas [${regionText}]</h4>
+                <div class="rune-tree-wrapper">
+                    ${sourceName === "KR" ? `
+                    <div class="itpk-tooltip-box" style="grid-column: 1 / 3; background: rgba(99, 102, 241, 0.05); border: 1px solid var(--border-glow); border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.75rem; font-size: 0.78rem; display: flex; gap: 0.5rem; align-items: start;">
+                        <i data-lucide="info" style="color: var(--primary); flex-shrink: 0; width: 14px; height: 14px; margin-top: 2px;"></i>
+                        <span><strong>Foco ITPK (DeepLoL):</strong> Dados consolidados dos Top OTPs Monos Coreanos. Esta build prioriza as escolhas de nicho de altíssima taxa de vitória e agressividade na SoloQ da Coreia do Sul (Grão-Mestre+).</span>
+                    </div>
+                    ` : ""}
+                    <div class="rune-primary-column">
+                        <div class="rune-tree-title">${data.runes.primary}</div>
+                        <div class="rune-item-row keystone">
+                            <img src="${data.runes.keystoneImg}" alt="keystone" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Marv1n4/lol-runes/main/Precision/LethalTempo/LethalTempo.png';">
+                            <strong>${data.runes.keystone}</strong>
+                        </div>
+                        ${runeSlotsHTML}
+                    </div>
+                    <div class="rune-primary-column">
+                        <div class="rune-tree-title ${data.runes.secondaryColor}">${data.runes.secondary}</div>
+                        ${secRuneSlotsHTML}
+                    </div>
+                    <div class="shards-row">
+                        <span class="shard-item"><span class="shard-circle offense"></span> ${data.runes.shardNames[0]}</span>
+                        <span class="shard-item"><span class="shard-circle flex"></span> ${data.runes.shardNames[1]}</span>
+                        <span class="shard-item"><span class="shard-circle defense"></span> ${data.runes.shardNames[2]}</span>
+                    </div>
+                </div>
+
+                <h4 class="chart-title" style="margin-top: 1.5rem;"><i data-lucide="sparkles"></i> Ordem de Evolução de Habilidades</h4>
+                <div class="skills-max-sequence" style="margin-top: 0.5rem;">
+                    <span class="skill-badge q">${data.skills.maxOrder[0] || 'Q'}</span>
+                    <span class="skill-arrow">&gt;</span>
+                    <span class="skill-badge e">${data.skills.maxOrder[1] || 'W'}</span>
+                    <span class="skill-arrow">&gt;</span>
+                    <span class="skill-badge w">${data.skills.maxOrder[2] || 'E'}</span>
+                    <span class="skill-badge" style="margin-left:auto; font-size:0.75rem; width:fit-content; padding: 0 0.5rem;">Ordem de Maximização</span>
+                </div>
+                
+                <div class="skill-grid-display">
+                    ${skillGridHTML}
+                </div>
+            </div>
+
+            <!-- Right: Build Path -->
+            <div class="card build-items-card">
+                <h4 class="chart-title"><i data-lucide="bag"></i> Caminho de Itens Recomendados [${regionText}]</h4>
+                <p class="chart-desc">Focado em fechar picos de poder eficientemente.</p>
+                
+                <div class="item-build-paths">
+                    <!-- Starting -->
+                    <div class="item-build-stage">
+                        <span class="stage-title">Itens Iniciais</span>
+                        <div class="stage-items">${startingItemsHTML}</div>
+                    </div>
+                    
+                    <!-- Core Build -->
+                    <div class="item-build-stage">
+                        <span class="stage-title">Núcleo da Build (Core Build)</span>
+                        <div class="stage-items" style="flex-direction: column;">${coreItemsHTML}</div>
+                    </div>
+                    
+                    <!-- Situational -->
+                    <div class="item-build-stage">
+                        <span class="stage-title">Itens Situacionais Comuns</span>
+                        <div class="stage-items" style="flex-direction: column;">${situationalItemsHTML}</div>
+                    </div>
+                </div>
             </div>
         `;
+
+        // 4. Support Synergy Cards
+        const champData = CHAMP_BUILDS_DATABASE[champName];
+        const synergyList = (champData && champData.synergy) || [
+            { name: "Thresh", winrate: "54.2%", strength: "excelent", label: "Excelente", desc: "A lanterna do Thresh provê reposicionamento essencial, facilitando recuos seguros e agressividade na rota." },
+            { name: "Lulu", winrate: "52.8%", strength: "excelent", label: "Excelente", desc: "Fornece buffs de velocidade de ataque, escudos e ultimate de emergência, ideal para proteger o aliado em lutas." },
+            { name: "Nautilus", winrate: "51.5%", strength: "good", label: "Bom Duo", desc: "Iniciações seguras e controle de grupo pesado, permitindo encaixar combos de habilidades facilmente." }
+        ];
+
+        let synergyHTML = "";
+        synergyList.forEach(sup => {
+            let badgeColor = sup.strength === "excelent" ? "strength-excelent" : "strength-good";
+            if (sup.strength === "weak") badgeColor = "strength-weak";
+
+            synergyHTML += `
+                <div class="synergy-support-card">
+                    <div class="sup-card-header">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${sup.name}.png" class="sup-card-avatar" alt="${sup.name}">
+                        <div class="sup-card-meta">
+                            <span class="sup-card-name">${sup.name}</span>
+                            <span class="sup-card-wr">${sup.winrate} Winrate</span>
+                        </div>
+                        <span class="sup-card-strength ${badgeColor}" style="margin-left: auto;">${sup.label}</span>
+                    </div>
+                    <p class="sup-card-desc">${sup.desc}</p>
+                </div>
+            `;
+        });
+        synergyContainer.innerHTML = synergyHTML;
+
+        lucide.createIcons();
+    };
+
+    // Check if in cache
+    if (buildCache[cacheKey]) {
+        renderData(buildCache[cacheKey]);
+        return;
     }
 
-    // 3. Items HTML
-    let startingItemsHTML = "";
-    data.items.starting.forEach(item => {
-        startingItemsHTML += `
-            <div class="stage-item-card">
-                <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item">
-                <div class="stage-item-info">
-                    <span class="stage-item-name">${item.name}</span>
-                    <span class="stage-item-cost">${item.cost} Ouro</span>
-                </div>
-            </div>
-        `;
-    });
+    // Check if in CHAMP_BUILDS_DATABASE
+    const champData = CHAMP_BUILDS_DATABASE[champName];
+    if (champData && champData[sourceName]) {
+        buildCache[cacheKey] = champData[sourceName];
+        renderData(buildCache[cacheKey]);
+        return;
+    }
 
-    let coreItemsHTML = "";
-    data.items.core.forEach(item => {
-        coreItemsHTML += `
-            <div class="stage-item-card">
-                <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item">
-                <div class="stage-item-info">
-                    <span class="stage-item-name">${item.name}</span>
-                    <span class="stage-item-cost">${item.cost} Ouro</span>
-                </div>
-            </div>
-        `;
-    });
-
-    let situationalItemsHTML = "";
-    data.items.situational.forEach(item => {
-        situationalItemsHTML += `
-            <div class="stage-item-card">
-                <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/${item.id}.png" alt="item">
-                <div class="stage-item-info">
-                    <span class="stage-item-name">${item.name}</span>
-                    <span class="stage-item-cost">${item.cost} Ouro</span>
-                </div>
-            </div>
-        `;
-    });
-
-    // Populate Master Inspector Grid
+    // Otherwise, show loading and fetch from API
     detailsContainer.innerHTML = `
-        <!-- Left: Runes & Skills -->
-        <div class="card build-runes-skills-card">
-            <h4 class="chart-title"><i data-lucide="shield-check"></i> Runas Recomendadas [${regionText}]</h4>
-            <div class="rune-tree-wrapper">
-                ${sourceName === "KR" ? `
-                <div class="itpk-tooltip-box" style="grid-column: 1 / 3; background: rgba(99, 102, 241, 0.05); border: 1px solid var(--border-glow); border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.75rem; font-size: 0.78rem; display: flex; gap: 0.5rem; align-items: start;">
-                    <i data-lucide="info" style="color: var(--primary); flex-shrink: 0; width: 14px; height: 14px; margin-top: 2px;"></i>
-                    <span><strong>Foco ITPK (DeepLoL):</strong> Dados consolidados dos Top OTPs Monos Coreanos. Esta build prioriza as escolhas de nicho de altíssima taxa de vitória e agressividade na SoloQ da Coreia do Sul (Grão-Mestre+).</span>
-                </div>
-                ` : ""}
-                <div class="rune-primary-column">
-                    <div class="rune-tree-title">${data.runes.primary}</div>
-                    <div class="rune-item-row keystone">
-                        <img src="${data.runes.keystoneImg}" alt="keystone">
-                        <strong>${data.runes.keystone}</strong>
-                    </div>
-                    ${runeSlotsHTML}
-                </div>
-                <div class="rune-primary-column">
-                    <div class="rune-tree-title ${data.runes.secondaryColor}">${data.runes.secondary}</div>
-                    ${secRuneSlotsHTML}
-                </div>
-                <div class="shards-row">
-                    <span class="shard-item"><span class="shard-circle offense"></span> ${data.runes.shardNames[0]}</span>
-                    <span class="shard-item"><span class="shard-circle flex"></span> ${data.runes.shardNames[1]}</span>
-                    <span class="shard-item"><span class="shard-circle defense"></span> ${data.runes.shardNames[2]}</span>
-                </div>
-            </div>
-
-            <h4 class="chart-title" style="margin-top: 1.5rem;"><i data-lucide="sparkles"></i> Ordem de Evolução de Habilidades</h4>
-            <div class="skills-max-sequence" style="margin-top: 0.5rem;">
-                <span class="skill-badge q">${data.skills.maxOrder[0]}</span>
-                <span class="skill-arrow">&gt;</span>
-                <span class="skill-badge e">${data.skills.maxOrder[1]}</span>
-                <span class="skill-arrow">&gt;</span>
-                <span class="skill-badge w">${data.skills.maxOrder[2]}</span>
-                <span class="skill-badge" style="margin-left:auto; font-size:0.75rem; width:fit-content; padding: 0 0.5rem;">Ordem de Maximização</span>
-            </div>
-            
-            <div class="skill-grid-display">
-                ${skillGridHTML}
-            </div>
-        </div>
-
-        <!-- Right: Build Path -->
-        <div class="card build-items-card">
-            <h4 class="chart-title"><i data-lucide="bag"></i> Caminho de Itens Recomendados [${regionText}]</h4>
-            <p class="chart-desc">Focado em fechar picos de poder eficientemente.</p>
-            
-            <div class="item-build-paths">
-                <!-- Starting -->
-                <div class="item-build-stage">
-                    <span class="stage-title">Itens Iniciais</span>
-                    <div class="stage-items">${startingItemsHTML}</div>
-                </div>
-                
-                <!-- Core Build -->
-                <div class="item-build-stage">
-                    <span class="stage-title">Núcleo da Build (Core Build)</span>
-                    <div class="stage-items" style="flex-direction: column;">${coreItemsHTML}</div>
-                </div>
-                
-                <!-- Situational -->
-                <div class="item-build-stage">
-                    <span class="stage-title">Itens Situacionais Comuns</span>
-                    <div class="stage-items" style="flex-direction: column;">${situationalItemsHTML}</div>
-                </div>
-            </div>
+        <div style="grid-column: 1 / 3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem; color: var(--text-muted);">
+            <div style="border: 3px solid rgba(255,255,255,0.05); border-top: 3px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 1rem;"></div>
+            <span>Buscando a build em tempo real dos Pros e OTPs no servidor ${sourceName}...</span>
         </div>
     `;
 
-    // 4. Support Synergy Cards (uses champ level synergy)
-    let synergyHTML = "";
-    champData.synergy.forEach(sup => {
-        let badgeColor = sup.strength === "excelent" ? "strength-excelent" : "strength-good";
-        if (sup.strength === "weak") badgeColor = "strength-weak";
-
-        synergyHTML += `
-            <div class="synergy-support-card">
-                <div class="sup-card-header">
-                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${sup.name}.png" class="sup-card-avatar" alt="${sup.name}">
-                    <div class="sup-card-meta">
-                        <span class="sup-card-name">${sup.name}</span>
+    fetch(`/api/champion-build?champion=${encodeURIComponent(champName)}&source=${encodeURIComponent(sourceName)}`)
+        .then(res => {
+            if (!res.ok) throw new Error("Erro na API de build");
+            return res.json();
+        })
+        .then(data => {
+            buildCache[cacheKey] = data;
+            if (currentBuildChamp === champName && currentBuildSource === sourceName) {
+                renderData(data);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            detailsContainer.innerHTML = `
+                <div style="grid-column: 1 / 3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem; color: var(--text-muted); text-align: center;">
+                    <i data-lucide="alert-circle" style="width: 40px; height: 40px; color: var(--text-loss); margin-bottom: 1rem;"></i>
+                    <span>Falha ao buscar a build ao vivo de ${champName} via ponte OP.GG.</span>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">${err.message || ""}</p>
+                </div>
+            `;
+            lucide.createIcons();
+        });
+}   <span class="sup-card-name">${sup.name}</span>
                         <span class="sup-card-wr">${sup.winrate} Winrate</span>
                     </div>
                     <span class="sup-card-strength ${badgeColor}" style="margin-left: auto;">${sup.label}</span>
@@ -1743,8 +1811,16 @@ function renderMatchupMatrix(champName) {
     const tbody = document.getElementById("matrix-table-body");
     if (!tbody) return;
 
-    const data = MATCHUP_MATRIX[champName];
-    if (!data) return;
+    let data = MATCHUP_MATRIX[champName];
+    if (!data) {
+        // Fallback procedural matchups if the champion does not exist in standard matrix
+        data = [
+            { enemy: "Yasuo", winrate: "49.5%", difficulty: "medium", tip: `Contra ${champName}, o Yasuo pode bloquear disparos importantes usando a Parede de Vento. Busque trocas estendidas após o cooldown.` },
+            { enemy: "Yone", winrate: "51.2%", difficulty: "medium", tip: `O Yone possui ótima iniciação de médio alcance com o E+Q3. Abuse do poke de ${champName} na distância máxima de segurança.` },
+            { enemy: "Zed", winrate: "44.0%", difficulty: "hard", tip: `Zed tentará explodir ${champName} com o combo da Marca da Morte (R). Guarde habilidades de fuga ou compre itens de resistência rapidamente.` },
+            { enemy: "Lux", winrate: "53.5%", difficulty: "easy", tip: `Lux depende de acertar a Ligação da Luz (Q). Desvie lateralmente e puna com agressividade enquanto a habilidade estiver indisponível.` }
+        ];
+    }
 
     tbody.innerHTML = "";
 
@@ -1762,7 +1838,7 @@ function renderMatchupMatrix(champName) {
         row.innerHTML = `
             <td>
                 <div class="matrix-enemy-cell">
-                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${item.enemy}.png" class="matrix-enemy-icon" alt="${item.enemy}">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${item.enemy}.png" class="matrix-enemy-icon" alt="${item.enemy}" onerror="this.onerror=null; this.src='https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Lux.png';">
                     <span>${item.enemy}</span>
                 </div>
             </td>
@@ -2232,16 +2308,13 @@ function setupSearchForm() {
 function handleSearch(query, region) {
     const apiKey = localStorage.getItem("riot-api-key");
     
-    // Check if query exists in mock database
     const exactMockKey = Object.keys(MOCK_PROFILES).find(k => k.toLowerCase() === query.toLowerCase());
-    
     if (exactMockKey) {
         currentProfile = MOCK_PROFILES[exactMockKey];
         renderProfile(currentProfile);
         return Promise.resolve(currentProfile);
     }
 
-    // Split Name and Tag
     const parts = query.split("#");
     const name = parts[0] ? parts[0].trim() : "";
     const tag = parts[1] ? parts[1].trim() : "";
@@ -2251,14 +2324,20 @@ function handleSearch(query, region) {
     }
 
     if (!apiKey) {
-        // Procedural generator
-        const profile = generateProceduralProfile(name, tag, region);
-        currentProfile = profile;
-        renderProfile(profile);
-        return Promise.resolve(profile);
+        return fetch(`/api/summoner-opgg?region=${encodeURIComponent(region.toLowerCase())}&name=${encodeURIComponent(name)}&tag=${encodeURIComponent(tag)}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Invocador não encontrado no OP.GG (${res.status})`);
+                }
+                return res.json();
+            })
+            .then(profile => {
+                currentProfile = profile;
+                renderProfile(profile);
+                return profile;
+            });
     }
 
-    // Call API proxy
     return fetchRealSummonerData(name, tag, region, apiKey);
 }
 
@@ -2458,7 +2537,12 @@ function generateDynamicCoachInsight(match) {
 function renderProfile(profile) {
     // 1. Update header banner
     const profileImg = document.querySelector(".profile-avatar");
-    if (profileImg) profileImg.src = profile.icon;
+    if (profileImg) {
+        profileImg.src = profile.icon;
+        profileImg.onerror = () => {
+            profileImg.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' fill='%231f2937'><rect width='100' height='100' rx='20' fill='%231f2937'/><path d='M50 50c8.28 0 15-6.72 15-15s-6.72-15-15-15-15 6.72-15 15 6.72 15 15 15zm0 8c-16.57 0-30 10.75-30 24h60c0-13.25-13.43-24-30-24z' fill='%239ca3af'/></svg>";
+        };
+    }
 
     const levelBadge = document.querySelector(".level-badge");
     if (levelBadge) levelBadge.textContent = profile.level;
@@ -2494,13 +2578,30 @@ function renderProfile(profile) {
     }
 
     // 3. Update coach tips panel
-    const coachTipText = document.querySelector(".coach-banner-tip p");
+    const coachTipText = document.querySelector(".tip-card p");
     if (coachTipText && profile.coachTip) {
-        coachTipText.innerHTML = profile.coachTip;
+        coachTipText.innerHTML = profile.coachTip.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    }
+
+    // Dynamic Sidebar Champions Card Title
+    const champCardTitle = document.querySelector(".champions-card .card-title");
+    if (champCardTitle) {
+        if (profile.role.includes("ADC")) {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores ADCs`;
+        } else if (profile.role.includes("Mid")) {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores Midlaners`;
+        } else if (profile.role.includes("Top")) {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores Toplaners`;
+        } else if (profile.role.includes("Jungle")) {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores Caçadores`;
+        } else if (profile.role.includes("Suporte")) {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores Suportes`;
+        } else {
+            champCardTitle.innerHTML = `<i data-lucide="swords"></i> Seus Melhores Campeões`;
+        }
     }
 
     // 4. Match history
-    // Replace RECENT_MATCHES globally so renderMatchHistory renders the new matches
     RECENT_MATCHES.length = 0;
     profile.matches.forEach(m => RECENT_MATCHES.push(m));
     renderMatchHistory();

@@ -80,6 +80,55 @@ http.createServer((req, res) => {
             return;
         }
 
+        if (pathname === '/api/summoner-opgg') {
+            const summonerOpgg = require('./api/summoner-opgg.js');
+            const mockReq = {
+                query: {
+                    region: params.get('region'),
+                    name: params.get('name'),
+                    tag: params.get('tag')
+                },
+                method: req.method
+            };
+            const mockRes = {
+                statusCode: 200,
+                status(code) {
+                    this.statusCode = code;
+                    return this;
+                },
+                json(data) {
+                    res.writeHead(this.statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+                    res.end(JSON.stringify(data));
+                }
+            };
+            summonerOpgg(mockReq, mockRes);
+            return;
+        }
+
+        if (pathname === '/api/champion-build') {
+            const championBuild = require('./api/champion-build.js');
+            const mockReq = {
+                query: {
+                    champion: params.get('champion'),
+                    source: params.get('source')
+                },
+                method: req.method
+            };
+            const mockRes = {
+                statusCode: 200,
+                status(code) {
+                    this.statusCode = code;
+                    return this;
+                },
+                json(data) {
+                    res.writeHead(this.statusCode, { 'Content-Type': 'application/json; charset=utf-8' });
+                    res.end(JSON.stringify(data));
+                }
+            };
+            championBuild(mockReq, mockRes);
+            return;
+        }
+
         if (pathname === '/api/summoner') {
             const region = params.get('region') || 'BR';
             const name = params.get('name');
